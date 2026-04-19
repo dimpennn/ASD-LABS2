@@ -36,7 +36,7 @@ Node *add_node(Node *head, int value)
 
 Node * delete_head(Node *head) 
 {
-    struct Node *new_head;
+    struct Node *new_head = NULL;
     if (head)
     {
         printf("ptr=%d info=%d next=%d \n", head, head->value, head->next);
@@ -44,6 +44,15 @@ Node * delete_head(Node *head)
         free(head);
     }
     return new_head;
+}
+
+Node * delete_list(Node *head) 
+{
+    while (head)
+    {
+        head = delete_head(head);
+    }
+    return NULL;
 }
 
 int main()
@@ -54,9 +63,7 @@ int main()
 
     printf(" ptr = %d \n", head);
 
-    head = delete_head(head);
-    head = delete_head(head);
-    head = delete_head(head);
+    head = delete_list(head);
 
     printf(" ptr = %d \n", head);
     return 0;
