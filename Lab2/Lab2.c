@@ -5,41 +5,59 @@
 typedef struct Node
 {
     int value;
-    struct Node *next_p;
+    struct Node * next;
 } Node;
 
 Node *create_node(int value)
 {
-    Node *prev_p;
-    prev_p = malloc(sizeof(struct Node));
-    if (prev_p != NULL)
+    Node *new_node;
+    new_node = malloc(sizeof(struct Node));
+    if (new_node != NULL)
     {
-        prev_p->value = value;
-        prev_p->next_p = NULL;
+        new_node->value = value;
+        new_node->next = NULL;
     }
-    printf("ptr=%d info=%d next=%d\n", prev_p, prev_p->value, prev_p->next_p);
-    return prev_p;
+    printf("ptr=%d info=%d next=%d\n", new_node, new_node->value, new_node->next);
+    return new_node;
 }
 
-Node *add_node(Node *prev_p, int value)
+Node *add_node(Node *head, int value)
 {
-    struct Node *node_p;
-    node_p = malloc(sizeof(struct Node));
-    if (node_p != NULL)
+    struct Node *new_node;
+    new_node = malloc(sizeof(struct Node));
+    if (new_node != NULL)
     {
-        node_p->value = value;
-        node_p->next_p = prev_p;
+        new_node->value = value;
+        new_node->next = head;
     }
-    printf("ptr=%d info=%d next=%d \n", node_p, node_p->value, node_p->next_p);
-    return node_p;
+    printf("ptr=%d info=%d next=%d \n", new_node, new_node->value, new_node->next);
+    return new_node;
+}
+
+Node * delete_head(Node *head) 
+{
+    struct Node *new_head;
+    if (head)
+    {
+        printf("ptr=%d info=%d next=%d \n", head, head->value, head->next);
+        new_head = head->next;
+        free(head);
+    }
+    return new_head;
 }
 
 int main()
 {
-    struct Node *head_p = create_node(10);
-    head_p = add_node(head_p, 20);
-    head_p = add_node(head_p, 30);
+    struct Node *head = create_node(10);
+    head = add_node(head, 20);
+    head = add_node(head, 30);
 
-    printf(" ptr = %d \n", head_p);
+    printf(" ptr = %d \n", head);
+
+    head = delete_head(head);
+    head = delete_head(head);
+    head = delete_head(head);
+
+    printf(" ptr = %d \n", head);
     return 0;
 }
