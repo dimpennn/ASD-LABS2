@@ -71,16 +71,56 @@ void print_list(Node *head)
     printf("NULL\n");
 }
 
+// зсув списку
+Node *right_shift(Node *head, int k) 
+{
+    if (head == NULL || head->next == NULL || k == 0) 
+    {
+        return head;
+    }
+
+    Node *tail = head;
+    int len = 1;
+
+    while (tail->next != NULL) 
+    {
+        tail = tail->next;
+        len++;
+    }
+
+    if (k == len) 
+    {
+        return head;
+    }
+
+    tail->next = head;
+
+    int steps_to_new_tail = len - k - 1;
+    Node *new_tail = head;
+    for (int i = 0; i < steps_to_new_tail; i++) 
+    {
+        new_tail = new_tail->next;
+    }
+
+    Node *new_head = new_tail->next;
+    new_tail->next = NULL;
+
+    return new_head;
+}
+
 int main()
 {
+    int k = 2;
+
     struct Node *head = create_node(10);
     head = add_node(head, 20);
     head = add_node(head, 30);
 
     print_list(head);
 
-    head = delete_list(head);
+    head = right_shift(head, k);
 
     print_list(head);
+    head = delete_list(head);
     return 0;
 }
