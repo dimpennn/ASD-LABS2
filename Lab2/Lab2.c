@@ -8,6 +8,7 @@ typedef struct Node
     struct Node * next;
 } Node;
 
+// створення нового/першого вузла
 Node *create_node(int value)
 {
     Node *new_node;
@@ -21,6 +22,7 @@ Node *create_node(int value)
     return new_node;
 }
 
+// додавання нового вузла на початок списку
 Node *add_node(Node *head, int value)
 {
     struct Node *new_node;
@@ -34,6 +36,7 @@ Node *add_node(Node *head, int value)
     return new_node;
 }
 
+// видалення першого вузла списку
 Node * delete_head(Node *head) 
 {
     struct Node *new_head = NULL;
@@ -46,6 +49,7 @@ Node * delete_head(Node *head)
     return new_head;
 }
 
+// видалення всього списку
 Node * delete_list(Node *head) 
 {
     while (head)
@@ -55,16 +59,28 @@ Node * delete_list(Node *head)
     return NULL;
 }
 
+// виведення всього списку в консоль
+void print_list(Node *head) 
+{
+    Node *temp = head;
+    while (temp != NULL) 
+    {
+        printf("%d -> ", temp->value);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
 int main()
 {
     struct Node *head = create_node(10);
     head = add_node(head, 20);
     head = add_node(head, 30);
 
-    printf(" ptr = %d \n", head);
+    print_list(head);
 
     head = delete_list(head);
 
-    printf(" ptr = %d \n", head);
+    print_list(head);
     return 0;
 }
