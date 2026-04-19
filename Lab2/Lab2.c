@@ -18,7 +18,6 @@ Node *create_node(int value)
         new_node->value = value;
         new_node->next = NULL;
     }
-    printf("ptr=%d info=%d next=%d\n", new_node, new_node->value, new_node->next);
     return new_node;
 }
 
@@ -32,7 +31,6 @@ Node *add_node(Node *head, int value)
         new_node->value = value;
         new_node->next = head;
     }
-    printf("ptr=%d info=%d next=%d \n", new_node, new_node->value, new_node->next);
     return new_node;
 }
 
@@ -42,7 +40,6 @@ Node * delete_head(Node *head)
     struct Node *new_head = NULL;
     if (head)
     {
-        printf("ptr=%d info=%d next=%d \n", head, head->value, head->next);
         new_head = head->next;
         free(head);
     }
@@ -110,11 +107,35 @@ Node *right_shift(Node *head, int k)
 
 int main()
 {
-    int k = 2;
+    int n, k, val;
+    Node *head = NULL;
 
-    struct Node *head = create_node(10);
-    head = add_node(head, 20);
-    head = add_node(head, 30);
+    printf("Enter the number of nodes (n > 0): ");
+    scanf("%d", &n);
+    if (n <= 0) 
+    {
+        printf("Error: n must be a positive integer.\n");
+        return 1;
+    }
+
+    printf("Enter the number of positions to shift (k >= 0): ");
+    scanf("%d", &k);
+    if (k < 0 || k > n) 
+    {
+        printf("Error: k must be positive and less than or equal to n.\n");
+        return 1;
+    }
+
+    printf("Enter %d values for the elements:\n", n);
+    for (int i = 0; i < n; i++) 
+    {
+        scanf("%d", &val);
+        if (head == NULL) {
+            head = create_node(val);
+        } else {
+            head = add_node(head, val);
+        }
+    }
 
     print_list(head);
 
@@ -122,5 +143,6 @@ int main()
 
     print_list(head);
     head = delete_list(head);
+
     return 0;
 }
