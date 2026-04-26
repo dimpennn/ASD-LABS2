@@ -5,7 +5,7 @@
 typedef struct Node
 {
     int value;
-    struct Node * next;
+    struct Node *next;
 } Node;
 
 // створення нового/першого вузла
@@ -35,7 +35,7 @@ Node *add_node(Node *head, int value)
 }
 
 // видалення першого вузла списку
-Node * delete_head(Node *head) 
+Node *delete_head(Node *head)
 {
     struct Node *new_head = NULL;
     if (head)
@@ -47,7 +47,7 @@ Node * delete_head(Node *head)
 }
 
 // видалення всього списку
-Node * delete_list(Node *head) 
+Node *delete_list(Node *head)
 {
     while (head)
     {
@@ -57,10 +57,10 @@ Node * delete_list(Node *head)
 }
 
 // виведення всього списку в консоль
-void print_list(Node *head) 
+void print_list(Node *head)
 {
     Node *temp = head;
-    while (temp != NULL) 
+    while (temp != NULL)
     {
         printf("%d -> ", temp->value);
         temp = temp->next;
@@ -69,9 +69,9 @@ void print_list(Node *head)
 }
 
 // зсув списку
-Node *right_shift(Node *head, int k) 
+Node *right_shift(Node *head, int k)
 {
-    if (head == NULL || head->next == NULL || k == 0) 
+    if (head == NULL || head->next == NULL || k == 0)
     {
         return head;
     }
@@ -79,13 +79,13 @@ Node *right_shift(Node *head, int k)
     Node *tail = head;
     int len = 1;
 
-    while (tail->next != NULL) 
+    while (tail->next != NULL)
     {
         tail = tail->next;
         len++;
     }
 
-    if (k == len) 
+    if (k == len)
     {
         return head;
     }
@@ -94,7 +94,7 @@ Node *right_shift(Node *head, int k)
 
     int steps_to_new_tail = len - k - 1;
     Node *new_tail = head;
-    for (int i = 0; i < steps_to_new_tail; i++) 
+    for (int i = 0; i < steps_to_new_tail; i++)
     {
         new_tail = new_tail->next;
     }
@@ -112,7 +112,7 @@ int main()
 
     printf("Enter the number of nodes (n > 0): ");
     scanf("%d", &n);
-    if (n <= 0) 
+    if (n <= 0)
     {
         printf("Error: n must be a positive integer.\n");
         return 1;
@@ -120,19 +120,22 @@ int main()
 
     printf("Enter the number of positions to shift (k >= 0): ");
     scanf("%d", &k);
-    if (k < 0 || k > n) 
+    if (k < 0 || k > n)
     {
         printf("Error: k must be positive and less than or equal to n.\n");
         return 1;
     }
 
     printf("Enter %d values for the elements:\n", n);
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
         scanf("%d", &val);
-        if (head == NULL) {
+        if (head == NULL)
+        {
             head = create_node(val);
-        } else {
+        }
+        else
+        {
             head = add_node(head, val);
         }
     }
